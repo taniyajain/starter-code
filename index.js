@@ -3,8 +3,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
 const path = require('path');
+const errorMiddleWare = require('./middleware/error')
 
 if(process.env.NODE_ENV !== "production"){
     require('dotenv').config();
@@ -25,8 +25,8 @@ app.use(cors({
     credentials:true,
     optionsSuccessStatus:200,
 }));
-app.use(passport.initialize());
 
+app.use(errorMiddleWare)
 //Base Routes
 app.use('/user', userRouter);
 
